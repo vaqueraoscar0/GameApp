@@ -7,6 +7,4 @@ module.exports = (app) => {
 
     // Create
     app.post('/new', Game.create)
-    app.post('/signup', Game.signUp)
-    app.post('/login', Game.login)
 }
