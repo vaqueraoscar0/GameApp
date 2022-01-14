@@ -7,7 +7,7 @@ const db = "game"
 
 // Middleware
 app.use(cookieParser());
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+app.use(cors({credentials:true, origin:"http://localhost:3000"}))
 app.use(express.json(), express.urlencoded({ extended: true }))
 
 // DB connection link to file

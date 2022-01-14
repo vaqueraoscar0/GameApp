@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const secret = 'gameAppTester'; // This should be inside of the .env file
+const secret = ''; // This should be inside of the .env file
 
 const auth = (req, res, next) => {
     jwt.verify(req.cookies.usertoken, secret, (err, payload) =>{
