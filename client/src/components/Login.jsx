@@ -1,5 +1,5 @@
 import {useHistory} from "react-router-dom";
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 
 const Index = () => {
@@ -40,26 +40,16 @@ const Index = () => {
             })
     }
 
-    const getAllUsers = () => {
-        axios.get("http://localhost:8000/users", { withCredentials:true })
-            .then(res => console.log(res))
-            .catch(err => {
-                console.log(err);
-                if(err.response.status === 401) {
-                    console.log("UNAUTHORIZED");
-                } else if(err.response.status === 400) {
-                    console.log("BAD REQUEST")
-                }
-            })
-    }
-
     const loginSubmit = (e) => {
         e.preventDefault();
         axios.post("http://localhost:8000/login", loginState, { withCredentials:true })
             .then(res => {
-                if(res.status == 200){
+                if(res.status === 200){
                     history.push('/'); //Will redirect the user after login is successful
                     console.log('Login Successful');
+                }else{
+                    history.push('/logout'); //Will redirect the user after login is successful
+                    console.log(res.status);
                 }
             })
             .catch(err => console.log(err))
@@ -67,9 +57,9 @@ const Index = () => {
 
     const logoutSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8000/logout", loginState, { withCredentials:true })
+        axios.post("http://localhost:8000/logout", { withCredentials:true })
             .then(res => {
-                if(res.status == 200){
+                if(res.status === 200){
                     history.push('/outpage'); //Will redirect the user after login is successful
                     console.log('Logout Successful');
                 }
@@ -134,7 +124,6 @@ const Index = () => {
                     <input type="submit" value="Logout"/>
                 </form>
             </div>
-
         </div>
     )
 }
