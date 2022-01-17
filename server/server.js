@@ -17,5 +17,6 @@ require('./config/mongoose.config')(db);
 require('./routes/game.routes')(app);
 require('./routes/user.routes')(app);
 
+
 // Server
 app.listen(port, () => console.log(`Listening on port: ${port} :) `))
