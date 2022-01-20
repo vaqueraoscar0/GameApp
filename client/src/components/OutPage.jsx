@@ -5,7 +5,7 @@ export default function OutPage (){
     return (
         <div>
             <div>
-                <center><h1>You Got Kicked Out!!!</h1></center>
+                <center><h1>This is another page</h1></center>
             </div>
         </div>
     )

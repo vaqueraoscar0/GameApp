@@ -3,8 +3,7 @@
     flex-direction: row;
     justify-content: space-between;
     width: 70%;
-    margin: 0 auto;
-    height: 100px;
+    margin: 15px auto;
 }
 
 .navlinks_1 {
@@ -13,7 +12,12 @@
     justify-content: space-evenly;
     align-items: center;
     width: 40%;
+    color: #eee;
+}
 
+.nav_links {
+    text-decoration: none;
+    color: #eee;
 }
 
 .navlinks_2 {
@@ -31,11 +35,11 @@
     text-decoration: none;
     padding: 3%;
     flex: 1;
+    color: #eee;
 }
 
 .register_btn {
     background-color: #8d52ff;
-    color: #eee;
 }
 
 .register_btn:hover {
@@ -44,31 +48,5 @@
 }
 
 .login_btn {
-    color: #8d52ff;
-}
-
-.logoImg{
-    margin-top: 25px;
-    margin-left: -120px;
-}
-
-@media screen and (max-width: 500px){
-    .list {
-        flex-direction: column;
-        height: auto;
-    }
-    .items:nth-child(1){
-        border-top: 1px solid rgba(255, 255, 255, 0.555);
-        margin-top: 50px;
-    }
-    .items {
-        width: 100%;
-        border-top: 1px solid rgba(255, 255, 255, 0.555);
-        text-align: center;
-        margin-right: 0px;
-        padding: 20px 0;
-    }
-    .btn {
-        display: block;
-    }
+    border: 2px solid #8d52ff;
 }

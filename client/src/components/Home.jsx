@@ -1,10 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import CarouselComponent from "./CarouselComponent";
-import style from './Home.module.css';
-import axios from 'axios';
+import { useLocation } from "react-router-dom";
 
 
 const Home = () => {
+    const location = useLocation();
+
+    useEffect(() => {
+        console.log(location.state); // result: 'some_value'
+    }, [location]);
+
+
+
     return (
         <div>
             <center>
