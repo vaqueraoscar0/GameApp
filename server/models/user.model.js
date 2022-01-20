@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const opts = { toJSON: { virtuals: true } };
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -19,33 +20,34 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, "{PATH} is required"],
-        minlength: [8, "Password must be 8 characters or longer"]
+        minlength: [8, "Password must be 8 characters or longer"],
     }
 
-}, {timestamps: true});
+}, {timestamps: true}, opts);
 
-// CREATE A TEMPORARY CONFIRM PASSWORD ATTRIBUTE IN OUR SCHEMA
-// UserSchema.virtual('confirmPassword')
-//     .get( () => this._confirmPassword )
-//     .set( value => this._confirmPassword = value );
+UserSchema.virtual('confirmPassword')
+    .get( () => this._confirmPassword )
+    .set( value => this._confirmPassword = value );
+
+// //CREATE A TEMPORARY CONFIRM PASSWORD ATTRIBUTE IN OUR SCHEMA
 //
-// // CREATE VALIDATIONS FOR THE CONFIRM PASSWORD
-// UserSchema.pre("validate", function(next){
-//     console.log("this is the password ", password)
-//     console.log("this is the confirm password ", _confirmPassword)
-//
-//     if(this.password !== this._confirmPassword){
-//         this.invalidate("confirmPassword", "Password and confirm password must match")
-//     }
-//     next()
-// })
+// // // CREATE VALIDATIONS FOR THE CONFIRM PASSWORD
+UserSchema.pre("validate", function(next){
+    console.log("this is the password ", this.password)
+    console.log("this is the confirm password ", this._confirmPassword)
+
+    if(this.password !== this._confirmPassword){
+        this.invalidate("confirmPassword", "Password and confirm password must match")
+    }
+    next()
+})
 //
 // // BEFORE SAVING THE USER, SWAP OUT PASSWORD WITH HAShED PASSWORD
-// UserSchema.pre("save", function(next) {
-//     bcrypt.hash(this.password, 10)
-//         .then(hashedPassword => {
-//             this.password = hashedPassword
-//             next()
-//         })
-// })
+UserSchema.pre("save", function(next) {
+    bcrypt.hash(this.password, 10)
+        .then(hashedPassword => {
+            this.password = hashedPassword
+            next()
+        })
+})
 module.exports.User = mongoose.model('User', UserSchema);

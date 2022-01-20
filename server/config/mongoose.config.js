@@ -1,8 +1,6 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 
-console.log(process.env.DATABASE_ACCESS);
-
 module.exports = (db) => {
     mongoose.connect(process.env.DATABASE_ACCESS)
         .then(() => console.log(`Established a connection to ${db} database`))

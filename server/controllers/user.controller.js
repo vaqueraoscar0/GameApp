@@ -1,6 +1,8 @@
 const { User } = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const {promisify} = require("util");
+const {decode} = require("jsonwebtoken");
 
 module.exports = {
 
@@ -46,7 +48,7 @@ module.exports = {
                                 const newJWT = jwt.sign({
                                     _id: user._id
                                 }, "secret")
-                                res.cookie("usertoken", newJWT, { httpOnly: true }).json("Success")
+                                res.cookie("usertoken", newJWT, { httpOnly: true }).json(user._id);
                             } else {
                                 res.status(400).json({ msg: "Invalid attempt" })
                             }
@@ -56,10 +58,24 @@ module.exports = {
             })
     },
 
-    allUsers: (req, res) => {
-        User.find()
-            .then(allUsers => res.json(allUsers))
-            .catch(err => res.json(err))
+
+    getUserCookie: async (req, res) => {
+        console.log(req.cookies.usertoken)
+        const decoded =  jwt.decode(req.cookies.usertoken);
+
+        //res.send("Jenn Chan")
+
+        User.findOne({_id:  '61e0cbb90427989082d49c8b' })
+            .then( user => {
+                if (user === null) {
+                    res.status(400).json({msg: "User not found"});
+                } else {
+                    console.log(user)
+                    res.send(user);
+                }
+            })
+
+
     },
 
     logout: (req, res) => {
