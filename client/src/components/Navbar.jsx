@@ -53,6 +53,11 @@ const Navbar = () => {
                     </Link>
                 </li>
                 <li>
+                    <Link className={styles.nav_links} to={'/chat'}>
+                        CHAT
+                    </Link>
+                </li>
+                <li>
                     <Link className={styles.nav_links}>
                         NEWS
                     </Link>

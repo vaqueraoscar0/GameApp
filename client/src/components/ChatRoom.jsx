@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col'
 import style from "./Home.module.css";
 
 
-const ChatRoom = () =>{
+const ChatRoom = ({messageContent}) =>{
 
     return (
         <div>
@@ -19,7 +19,29 @@ const ChatRoom = () =>{
                     <Col xs={6} className={style.box2}>
                         <div>
                             <center><br/><h5>Messages</h5></center>
-                            {/*<div className={style.box}></div>*/}
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                                <h6>Hello</h6>
+                            {/*    {messageContent.map((messageList) => {*/}
+                            {/*        return <h6>{messageList.message}</h6>*/}
+                            {/*    })}*/}
                         </div>
                     </Col>
                     <Col  className={style.box3}>

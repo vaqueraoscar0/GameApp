@@ -2,6 +2,7 @@ import "../App.css";
 import io from "socket.io-client";
 import {useState} from "react";
 import ChatCom from "./ChatCom";
+import ChatRoom from "./ChatRoom";
 
 const socket = io.connect("http://localhost:8000");
 
@@ -21,26 +22,30 @@ const Chat = () =>{
         <div className="Chat">
             {!showChat ? (
                 <div className="joinChatContainer">
-                    <h3>Join A Chat</h3>
-                    <input
-                        type="text"
-                        placeholder="John..."
-                        onChange={(event) => {
-                            setUsername(event.target.value);
-                        }}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Room ID..."
-                        onChange={(event) => {
-                            setRoom(event.target.value);
-                        }}
-                    />
-                    <button onClick={joinRoom}>Join A Room</button>
+                    <div className={'JoinChatBox'}>
+                        <div className={'JoinChat'}>
+                            <h3>Join A Chat</h3>
+                            <input
+                                type="text"
+                                placeholder="John..."
+                                onChange={(event) => {
+                                    setUsername(event.target.value);
+                                }}
+                            /><br/>
+                            <input
+                                type="text"
+                                placeholder="Room ID..."
+                                onChange={(event) => {
+                                    setRoom(event.target.value);
+                                }}
+                            /><br/><br/>
+                            <button onClick={joinRoom}>Join A Room</button>
+                        </div>
+                    </div>
                 </div>
-            ) : (
-                <ChatCom socket={socket} username={username} room={room} />
-            )}
+                ) : (
+                    <ChatCom socket={socket} username={username} room={room} />
+                )}
         </div>
     );
 }
