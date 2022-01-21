@@ -4,4 +4,5 @@ module.exports = (app) => {
     // Create
     app.post('/new', Game.create)
     app.get('/games', Game.GameList)
+    app.get('/games/:id', Game.findOne)
 }

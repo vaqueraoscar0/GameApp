@@ -18,5 +18,12 @@ module.exports = {
                 res.send(result)
             }
         })
+    },
+
+    // Retrieve one
+    findOne: (req, res) => {
+        Game.findById(req.params.id)
+            .then(game => res.json(game))
+            .catch(err => res.json(err))
     }
 }
