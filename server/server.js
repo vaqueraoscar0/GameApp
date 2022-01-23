@@ -1,5 +1,6 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const { Server } = require("socket.io");
 const cors = require('cors');
 const http = require("http");
@@ -9,6 +10,7 @@ const db = "game"
 
 // Middleware
 app.use(cookieParser());
+app.use(bodyParser.json());
 app.use(cors({credentials:true, origin:"http://localhost:3000"}))
 app.use(express.json(), express.urlencoded({ extended: true }))
 
@@ -20,6 +22,8 @@ require('./config/mongoose.config')(db);
 // Routes
 require('./routes/game.routes')(app);
 require('./routes/user.routes')(app);
+require('./routes/forum.routes')(app);
+require('./routes/post.routes')(app);
 
 const io = new Server(server, {
     cors: {
@@ -29,20 +33,20 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-    console.log(`User Connected: ${socket.id}`);
+    //console.log(`User Connected: ${socket.id}`);
 
     socket.on("join_room", (data) => {
         socket.join(data);
-        console.log(`User with ID: ${socket.id} joined room: ${data}`);
+        //console.log(`User with ID: ${socket.id} joined room: ${data}`);
     });
 
     socket.on("send_message", (data) => {
         socket.to(data.room).emit("receive_message", data);
-        console.log(data);
+        //console.log(data);
     });
 
     socket.on("disconnect", () => {
-        console.log("User Disconnected", socket.id);
+        //console.log("User Disconnected", socket.id);
     });
 });
 

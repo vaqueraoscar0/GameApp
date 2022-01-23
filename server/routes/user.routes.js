@@ -9,5 +9,7 @@ module.exports = (app) => {
     app.post('/login', User.login)
     app.post('/logout', User.logout)
     app.get('/userid', User.getUserCookie)
-    app.get('/isauth', Middleware.authenticate)
+    app.post('/newChat', User.createChat)
+    app.post('/saveMessage', User.newMessageList)
+    app.get('/getMessages', User.messageList)
 }
